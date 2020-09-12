@@ -1,0 +1,167 @@
+body{
+    margin:0;
+    padding:0;
+    text-align:left;
+    font-size: 32px;
+    width:100%;
+}
+header{
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+}
+h1{
+    font-size: 100%;
+}
+main{
+    width:100%;
+    display: block;
+    border-bottom:1px solid #ccc;
+    position:relative;
+}
+footer{
+    background-color: #fff;
+    border-bottom:1px solid #ccc;
+    text-align: center;
+}
+p{
+    font-size:200%;
+    text-align: center;
+    border-bottom:1px solid #fff;
+    height:200px;
+}
+ul{
+    padding: 0;
+    border-top: 1px solid #000000;
+    display:table;  /* 定義 */
+    table-layout: fixed;
+    width:96%;
+    font-size: 80%;
+    margin: 0 3%;
+    text-align: center;
+}
+li{
+    list-style-type:none;
+    border: 1px solid #666;
+    background-color: #fff;
+    display:table-cell;  /* 定義 */
+    cursor: pointer;
+    color:#0d7dfd;
+}
+
+li:active{
+    transform: translateY(4px);
+    border-bottom: none;
+    border-bottom: 2px solid #000000;
+    cursor: pointer;
+}
+
+li:hover{
+    background: #E67A7A;
+    *color:#;*
+}
+
+#save{
+    background-color: #F08080;
+    color: #fff;
+}
+
+#clear{
+    background-color: #E6B07A;
+    color: #fff;
+}
+
+#year{
+    margin: 0 0 0 3%;
+}
+
+
+textarea{
+  margin: 10px 3%;
+  width: 95%;
+  height: 200px;
+  font-size:80%;
+  box-shadow: 3px 3px 3px 3px #555;
+  background-color:#F0D8D8;
+  white-space: pre-wrap;
+}
+#key{
+    margin:0 3%;
+    width: 95%;
+    font-size:80%;
+    background-color: #F0A8A8;
+    box-shadow: 3px 3px 3px 3px #555;
+}
+table{
+    margin: 20px 3%;
+    width:96%;
+    
+}
+/* th{
+    width:30%;
+    font-size:24px;
+    background-color:#d0e7fc;
+    border-bottom: 1px solid #F0D8D8;
+} */
+td{
+    font-size:16px;
+    background-color:#F0D8D8;
+    border-bottom: 1px solid #F0A8A8;
+    white-space: pre-wrap;
+}
+
+#text-button0 {
+    display: block;
+    cursor: pointer;
+    width: 160px;
+    height: 100%;
+    text-align: center;
+    border: 1px solid #232323;
+  }
+
+  #text-button1 {
+    display: block;
+    cursor: pointer;
+    width: 160px;
+    height: 100%;
+    text-align: center;
+    border: 1px solid #232323;
+  }
+
+  #text-button3 {
+    display: block;
+    cursor: pointer;
+    width: 160px;
+    height: 100%;
+    text-align: center;
+    border: 1px solid #232323;
+  }
+
+  #text-button4 {
+    display: block;
+    cursor: pointer;
+    width: 160px;
+    height: 100%;
+    text-align: center;
+    border: 1px solid #232323;
+  }
+
+#day{
+    width: 15%;
+}
+
+#title{
+    width: 25%;
+}
+
+#main-text{
+    width: 50%;
+}
+
+#text{
+    width: 10%;
+}
+
+small{
+    font-size: 20px;   
+}

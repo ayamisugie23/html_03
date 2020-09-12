@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>myMemoPad</title>
+<script src="js/jquery-2.1.3.min.js"></script>
+<link rel="stylesheet" href="css/sample.css">
+</head>
+<body>
+<header>
+<h1>MYLOG</h1>
+</header>
+<main>
+    <!-- <div id="text-button"><span id="text">DONE</span></div> -->
+    <!-- セレクトボックス作成[START] -->
+    <select id="year"></select>
+    <select id="month"></select>
+    <select id="date"></select>
+    <!-- セレクトボックス作成[END] -->
+    
+    <input type="text" id="key">
+    <textarea id="memo"></textarea>
+    <ul>
+        <li id="save">MAKE A LIST</li>
+        <li id="clear">CLEAR</li>
+    </ul>
+</main>
+    <div id = "table-list">
+        <table id="list">
+        <!-- ここに追加データが挿入される -->
+        </table>
+    </div>
+<script>
+
+//既存データの取得
+
+var bfhtml = [];
+var jsncnt = localStorage.length;
+
+//var jsncnt = Object.keys(myjson).length;
+//alert(jsncnt);
+var getjson = [];
+// var arygetjson= [];
+var date = [];
+var gettitle = [];
+var gettext = [];
+var arygetjson = "";
+
+ var cnt = 0;
+ while(cnt < jsncnt){
+    //var spdata = getdata.split(",");
+    //console.log(spdata);
+
+    JSON.parse(localStorage.getItem(cnt));
+    getjson = JSON.parse(localStorage.getItem(cnt));
+    arygetjson = new Array(JSON.stringify(getjson)); 
+    //alert("ar"+arygetjson);
+    
+    //テーブル編集
+    var arydate = "";
+    //alert("cnt"+cnt);
+    //alert("jscnt"+jsncnt);
+    //alert("arygetjson"+arygetjson);
+    var a = typeof arydate;
+    var b = typeof arygetjson;
+    //alert("a"+a);
+    //alert("b"+b);
+    arydate = arygetjson[cnt].substr(7,10);    
+    var ary =[]; 
+    //ary = arygetjson;
+    console.log(arygetjson[cnt]);
+    ary = arygetjson[cnt].split(',');
+    //ary = ary.replace(/"/g,"");
+    // alert("ary"+ary);
+    // alert("ary1"+ary[1]);
+    // alert("ary2"+ary[2]);
+    var arytitle = ary[1].substr(8).slice(0,-1);
+    var arytext = ary[2].substr(6).slice(0,-2);
+    console.log(ary);
+    // alert(arydate);
+    // alert("t"+arytitle);
+    // alert(arytext);
+
+    //bfhtml[cnt] = '<tr><td><input type="checkbox" name="level" value="ok"></td><td id = "day">'+arydate+'</td><td id = "title">'+arytitle+'</td><td id = "main-text">'+arytext+'</td><td class="change"><input type="button" value=" " id="text-button"><span id ="text"></span></input></td></tr>';
+    bfhtml[cnt] = '<tr><td><input type="checkbox" name="level" value="ok"></td><td id = "day">'+arydate+'</td><td id = "title">'+arytitle+'</td><td id = "main-text">'+arytext+'</td><td class="change"><input type="button" value=" " id="text-button'+cnt+'"><span id ="text'+cnt+'"></span></input></td></tr>';
+    $("#list").append(bfhtml[cnt]);
+    cnt++;
+
+//1つ用チェック
+    document.getElementById("text-button0").onclick = function() {
+    alert('よくできました(*´ω｀*)');
+    document.getElementById("text-button0").value = "まる◎";
+    var button = $("#text-button0").val();
+    var textd = $("#text0").val();
+    console.log(i);
+        };
+}
+
+let now = new Date();            //日付取得準備（必須）！！
+let year = now.getFullYear();    //年
+
+//年:1990~2022
+let y = ""; //例) y += '<option value="'+i+'">'+i+'</option>';
+for(let i=year-10; i<year+11; i++){
+    y += '<option value="'+i+'">'+i+'</option>';
+}
+$("#year").html(y);
+
+//月:1~12
+let m = "";
+for(let i=1; i<13; i++){
+    m +='<option value="'+i+'">'+i+'</option>';
+}
+$("#month").html(m);
+
+//日:1~31
+let d = "";
+for(let i=1; i<=31; i++){
+    d +='<option value="'+i+'">'+i+'</option>';
+}
+$("#date").html(d);
+
+//データ配列用変数のセット
+var n = cnt;
+var html = [];
+var object = [];
+var myjson = [];
+var save = [];
+
+//1.Save クリックイベント
+$("#save").on("click",function(){
+    var key = $("#key").val();
+    var memo = $("#memo").val();
+    var yyyy = $("#year").val();
+    var mm = $("#month").val();
+    if (mm<10){
+        mm = "0"+mm;
+    }
+    console.log(mm);
+    var dd = $("#date").val();
+    if (dd<10){
+        dd = "0"+dd;
+    }
+    //エンコード
+    var jsonDatak = JSON.stringify(key);
+    var jsonDatam = JSON.stringify(memo);
+    var jsonyyyy = JSON.stringify(yyyy);
+    var jsonmm = JSON.stringify(mm);
+    var jsondd = JSON.stringify(dd);
+    console.log(jsonDatak);
+    console.log(jsonDatam);
+    console.log(jsonyyyy);
+    console.log(jsonmm);
+    console.log(jsondd);
+    yyyymmdd = yyyy+'/'+mm+'/'+dd;
+    // var yyyymmdd = String(yyyymmdd);
+    console.log(yyyymmdd);
+
+    //格納
+    object = {
+        "日付":yyyymmdd,
+        "タイトル":key,
+        "本文":memo
+        };
+    console.log(object);
+    localStorage.setItem(n, JSON.stringify(object));
+
+    //テーブルに登録
+    html[n] = '<tr><td><input type="checkbox" name="level" value="ok"></td><td id = "day">'+yyyy+'/'+mm+'/'+dd+'</td><td id = "title">'+key+'</td><td id = "main-text">'+memo+'</td><td class="change"><input type="button" value=" " id="text-button'+n+'"><span id ="text'+n+'"></span></input></td></tr>';
+    $("#list").append(html[n]);
+    alert("登録しました");
+    n++;
+    console.log(n);
+    console.log(memo);
+    console.log(html);
+
+    //1つ用チェック
+    if(n = 0){
+        document.getElementById("text-button0").onclick = function() {
+            alert('よくできました(*´ω｀*)');
+            document.getElementById("text-button0").value = "まる◎";
+            var button = $("#text-button0").val();
+            var textd = $("#text0").val();
+            console.log(i);
+        };
+    }else{
+        document.getElementById("text-button1").onclick = function() {
+        alert('よくできました(*´ω｀*)');
+        document.getElementById("text-button1").value = "まる◎";
+        var button = $("#text-button1").val();
+        var textd = $("#text1").val();
+        console.log(i);
+        };
+    };
+    
+    
+    
+    
+
+
+    //2.clear クリックイベント
+    $("#clear").on("click",function(){
+            $('#list input[type=checkbox]:checked').each(function() {
+                $(this).closest('tr').remove();
+                localStorage.clear();
+                alert("削除しました");
+            });
+    }); 
+
+}); 
+
+//5件まではボタン変更
+// var chcnt = n + jsncnt;
+//     console.log(chcnt);
+//     i = 0;
+//         document.getElementById("text-button0").onclick = function() {
+//             alert('よくできました(*´ω｀*)');
+//             document.getElementById("text-button0").value = "まる◎";
+//             var button = $("#text-button0").val();
+//             var textd = $("#text0").val();
+//             console.log(i);
+//         };
+//         document.getElementById("text-button1").onclick = function() {
+//             alert('よくできました(*´ω｀*)');
+//             document.getElementById("text-button1").value = "まる◎";
+//             var button = $("#text-button1").val();
+//             var textd = $("#text1").val();
+//             console.log(i);
+//         };
+//         document.getElementById("text-button2").onclick = function() {
+//             alert('よくできました(*´ω｀*)');
+//             document.getElementById("text-button2").value = "まる◎";
+//             var button = $("#text-button2").val();
+//             var textd = $("#text2").val();
+//             console.log(i);
+//         };
+//         document.getElementById("text-button3").onclick = function() {
+//             alert('よくできました(*´ω｀*)');
+//             document.getElementById("text-button3").value = "まる◎";
+//             var button = $("#text-button3").val();
+//             var textd = $("#text3").val();
+//             console.log(i);
+//         };
+//         document.getElementById("text-button4").onclick = function() {
+//             alert('よくできました(*´ω｀*)');
+//             document.getElementById("text-button4").value = "まる◎";
+//             var button = $("#text-button4").val();
+//             var textd = $("#text4").val();
+//             console.log(i);
+//         };
+
+//2.clear クリックイベント
+$("#clear").on("click",function(){
+            $('#list input[type=checkbox]:checked').each(function() {
+                $(this).closest('tr').remove();
+                localStorage.clear();
+                alert("削除しました");
+            });
+    }); 
+
+
+</script>
+
+<!-- <script type="text/javascript" src="JS/done.js"></script> -->
+
+<footer><small>積み上げが未来をつくる( ˘ω˘ )</small></footer>
+</body>
+</html>
